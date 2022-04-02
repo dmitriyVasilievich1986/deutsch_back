@@ -1,3 +1,22 @@
 from django.db import models
 
-# Create your models here.
+
+class GroupModel(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+
+
+class ThemeModel(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+
+
+class WortModel(models.Model):
+    wort = models.CharField(max_length=150, null=False, unique=True)
+    translate = models.CharField(max_length=150, null=False)
+    group = models.ForeignKey(
+        on_delete=models.CASCADE,
+        related_name="wort",
+        to=GroupModel,
+        null=True,
+    )
+
+    theme = models.ManyToManyField(ThemeModel)
