@@ -1,4 +1,6 @@
 __pycache__
 migrations
+static/js
+static/i
 *.pyc
 *.env
