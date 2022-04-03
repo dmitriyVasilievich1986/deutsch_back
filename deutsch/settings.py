@@ -55,11 +55,11 @@ WSGI_APPLICATION = 'deutsch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
-        'PASSWORD': 'root',
-        'NAME': 'deutsch',
-        'USER': 'root',
-        'PORT': '3306',
+        'HOST': environ.get("DB_HOST", "127.0.0.1"),
+        'PASSWORD': environ.get("DB_PASSWORD", "root"),
+        'NAME': environ.get("DB_NAME", "deutsch"),
+        'USER': environ.get("DB_USER", "root"),
+        'PORT': environ.get("DB_PORT", "3306"),
     }
 }
 
