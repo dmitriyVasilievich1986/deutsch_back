@@ -1,5 +1,5 @@
-from .serializer import WortSerializer, GroupSerializer, ThemeSerializer
-from .models import WortModel, GroupModel, ThemeModel
+from .serializer import WortSerializer, GroupSerializer, ThemeSerializer, WortThemeSerializer
+from .models import WortModel, GroupModel, ThemeModel, WortThemeModel
 from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -31,3 +31,8 @@ class GroupViewSet(viewsets.ModelViewSet):
             "wort": [WortSerializer(instance=x).data for x in instance.wort.all()]
         }
         return Response(payload)
+
+
+class WortThemeViewSet(viewsets.ModelViewSet):
+    queryset = WortThemeModel.objects.all()
+    serializer_class = WortThemeSerializer

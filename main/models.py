@@ -19,4 +19,13 @@ class WortModel(models.Model):
         null=True,
     )
 
-    theme = models.ManyToManyField(ThemeModel)
+
+class WortThemeModel(models.Model):
+    wort = models.ForeignKey(
+        on_delete=models.DO_NOTHING,
+        to=WortModel,
+    )
+    theme = models.ForeignKey(
+        on_delete=models.DO_NOTHING,
+        to=ThemeModel,
+    )
