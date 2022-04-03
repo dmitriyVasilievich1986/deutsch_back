@@ -22,6 +22,8 @@ def set_enviroments():
 
 
 def runserver():
+    execute_from_command_line(["deutsch", "makemigrations"])
+    execute_from_command_line(["deutsch", "migrate"])
     execute_from_command_line(["deutsch", "runserver", "0.0.0.0:3000"])
 
 
