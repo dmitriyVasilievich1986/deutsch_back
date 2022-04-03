@@ -14,6 +14,7 @@ def parse_args():
 
 
 def set_enviroments():
+    environ.setdefault("DJANGO_SETTINGS_MODULE", "deutsch.settings")
     if not path.exists(".env"):
         return
     with open(".env", "r") as f:
