@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from django.core.management import execute_from_command_line
-from os import environ
+from os import environ, path
 from argparse import ArgumentParser
 import re
 
@@ -10,6 +10,8 @@ def parse_args():
 
 
 def set_enviroments():
+    if not path.exists(".env"):
+        return
     with open(".env", "r") as f:
         for l in f.readlines():
             regular = re.match(r'^.*?=', l)
