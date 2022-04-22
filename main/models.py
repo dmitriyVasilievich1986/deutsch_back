@@ -22,10 +22,10 @@ class WortModel(models.Model):
 
 class WortThemeModel(models.Model):
     wort = models.ForeignKey(
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         to=WortModel,
     )
     theme = models.ForeignKey(
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         to=ThemeModel,
     )
