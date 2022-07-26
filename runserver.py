@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from django.core.management import execute_from_command_line
 from django.db.utils import OperationalError
 from argparse import ArgumentParser
@@ -31,17 +31,25 @@ def set_enviroments():
 def execute_commands():
     execute_from_command_line(["deutsch", "makemigrations"])
     execute_from_command_line(["deutsch", "migrate"])
-    execute_from_command_line(["deutsch", "runserver", "0.0.0.0:3000"])
+
+    HOST = environ.get("HOST", "0.0.0.0")
+    PORT = environ.get("PORT", "3000")
+    execute_from_command_line(["deutsch", "runserver", f"{HOST}:{PORT}"])
 
 
 def runserver():
-    for _ in range(5):
+    for try_count in range(1, 6):
         try:
             connections["default"].cursor()
             logging.info(f"connected successfuly")
             return execute_commands
         except OperationalError as e:
-            logging.error(e)
+            x = connections["default"].settings_dict
+            error = (
+                f"{try_count} try: {e.args[1]} credentials - {x['USER']}:{x['PASSWORD']}"
+                if len(e.args) > 1 else e
+            )
+            logging.error(error)
         sleep(10)
     raise OperationalError
 
