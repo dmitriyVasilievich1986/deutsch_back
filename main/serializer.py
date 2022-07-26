@@ -1,11 +1,11 @@
-from .models import GroupModel, WortModel, ThemeModel, WortThemeModel
+from .models import MainWordModel, ThemeModel, WordThemeModel
 from rest_framework import serializers
 
 
-class WortSerializer(serializers.ModelSerializer):
+class MainWordSerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
-        model = WortModel
+        model = MainWordModel
 
 
 class ThemeSerializer(serializers.ModelSerializer):
@@ -14,13 +14,7 @@ class ThemeSerializer(serializers.ModelSerializer):
         model = ThemeModel
 
 
-class GroupSerializer(serializers.ModelSerializer):
+class WordThemeSerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
-        model = GroupModel
-
-
-class WortThemeSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = "__all__"
-        model = WortThemeModel
+        model = WordThemeModel

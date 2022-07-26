@@ -1,3 +1,4 @@
+from enum import Enum, auto
 from pathlib import Path
 from os import environ
 
@@ -54,12 +55,12 @@ WSGI_APPLICATION = 'deutsch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': environ.get("DB_HOST", "127.0.0.1"),
         'PASSWORD': environ.get("DB_PASSWORD", "root"),
-        'NAME': environ.get("DB_NAME", "deutsch"),
+        'HOST': environ.get("DB_HOST", "127.0.0.1"),
+        'NAME': environ.get("DB_NAME", "testdb"),
         'USER': environ.get("DB_USER", "root"),
         'PORT': environ.get("DB_PORT", "3306"),
+        'ENGINE': 'django.db.backends.mysql',
     }
 }
 
@@ -108,3 +109,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+class GROUPS(Enum):
+    adjective: str = "adjective"
+    noun: str = "noun"
+    verb: str = "verb"
+
+class GENUSES(Enum):
+    masculine: str = "masculine"
+    feminin: str = "feminin"
+    neutral: str = "neutral"

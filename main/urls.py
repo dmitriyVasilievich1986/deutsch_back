@@ -1,9 +1,9 @@
-from .views import GroupViewSet, WortViewSet, ThemeViewSet, WortThemeViewSet
+from .views import GroupViewSet, WordViewSet, ThemeViewSet, WordThemeViewSet
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'worttheme', WortThemeViewSet)
-router.register(r'group', GroupViewSet)
+router.register(r'group', GroupViewSet, basename="group")
+router.register(r'wordtheme', WordThemeViewSet)
 router.register(r'theme', ThemeViewSet)
-router.register(r'wort', WortViewSet)
+router.register(r'word', WordViewSet)
 urlpatterns = router.urls
