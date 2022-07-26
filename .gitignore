@@ -1,6 +1,8 @@
 __pycache__
 migrations
 static/js
+test*.sql
 static/i
 *.pyc
 *.env
+venv
