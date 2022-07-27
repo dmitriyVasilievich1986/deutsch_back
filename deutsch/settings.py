@@ -110,12 +110,24 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+
 class GROUPS(Enum):
     adjective: str = "adjective"
+    pronoun: str = "pronoun"
     noun: str = "noun"
     verb: str = "verb"
+
 
 class GENUSES(Enum):
     masculine: str = "masculine"
     feminin: str = "feminin"
     neutral: str = "neutral"
+
+PRONOUN = {
+    "you_many": {"rs": "ви", "ru": "вы"},
+    "they": {"rs": "они", "ru": "они"},
+    "you": {"rs": "ти", "ru": "ты"},
+    "he": {"rs": "он", "ru": "он"},
+    "we": {"rs": "ми", "ru": "мы"},
+    "i": {"rs": "ја", "ru": "я"},
+}

@@ -2,6 +2,7 @@ from .serializer import MainWordSerializer, ThemeSerializer, WordThemeSerializer
 from .models import MainWordModel, ThemeModel, WordThemeModel
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.conf import settings
@@ -19,6 +20,10 @@ class ThemeViewSet(viewsets.ModelViewSet):
 class WordViewSet(viewsets.ModelViewSet):
     serializer_class = MainWordSerializer
     queryset = MainWordModel.objects.all()
+
+    @action(detail=False, methods=["GET"])
+    def randomize(self, request, *args, **kwargs):
+        return Response({"rand": MainWordModel.get_random_dativ()})
 
 
 class GroupViewSet(viewsets.ViewSet):
