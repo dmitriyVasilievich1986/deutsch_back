@@ -1,10 +1,14 @@
-from enum import Enum, auto
 from pathlib import Path
 from os import environ
+from enum import Enum
+import logging
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = environ.get("DEBUG", "False") == "True"
 SECRET_KEY = environ.get("SECRET", "secret")
+
+logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -122,6 +126,7 @@ class GENUSES(Enum):
     masculine: str = "masculine"
     feminin: str = "feminin"
     neutral: str = "neutral"
+
 
 PRONOUN = {
     "you_many": {"rs": "ви", "ru": "вы"},
