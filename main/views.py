@@ -28,12 +28,16 @@ class WordViewSet(viewsets.ModelViewSet):
 
 class GroupViewSet(viewsets.ViewSet):
     def list(self, request, *args, **kwargs):
-        return Response([x.value for x in settings.GROUPS])
+        payload = [
+            {"id": i, "name": x.value}
+            for i, x in enumerate(settings.GROUPS, 1)
+        ]
+        return Response(payload)
 
     def retrieve(self, request, pk=None, *args, **kwargs):
         if not pk in settings.GROUPS.__members__:
             raise NotFound
-        return Response({"message":"ok"})
+        return Response({"message": "ok"})
 
 
 class WordThemeViewSet(viewsets.ModelViewSet):

@@ -25,7 +25,7 @@ class MainWordModel(models.Model):
     pronoun_they = models.TextField(null=True, blank=True)
 
     genus = models.CharField(
-        choices=[(x.value,x.value) for x in settings.GENUSES],
+        choices=[(x.value, x.value) for x in settings.GENUSES],
         default=settings.GENUSES.masculine.value,
         max_length=50,
         blank=False,
@@ -33,7 +33,7 @@ class MainWordModel(models.Model):
     )
 
     group = models.CharField(
-        choices=[(x.value,x.value) for x in settings.GROUPS],
+        choices=[(x.value, x.value) for x in settings.GROUPS],
         default=settings.GROUPS.noun.value,
         max_length=50,
         blank=False,
@@ -44,7 +44,8 @@ class MainWordModel(models.Model):
     def get_random_dativ():
         pron, pron_rs, pron_ru = MainWordModel.get_random_pronoun()
 
-        verb_rs, verb_ru = MainWordModel.get_word_random(group="verb",declination=f"pronoun_{pron}")
+        verb_rs, verb_ru = MainWordModel.get_word_random(
+            group="verb", declination=f"pronoun_{pron}")
         adj_rs, adj_ru = MainWordModel.get_word_random(group="adjective")
         noun_rs, noun_ru = MainWordModel.get_word_random()
 
@@ -59,7 +60,7 @@ class MainWordModel(models.Model):
         return random_pronoun, pronoun_rs, pronoun_ru
 
     @staticmethod
-    def get_word_random(declination: str="accusative", group="noun"):
+    def get_word_random(declination: str = "accusative", group="noun"):
         item = choice(MainWordModel.objects.filter(group=group))
         item_rs = item.__dict__[declination]
         item_ru = item.translate
@@ -68,10 +69,12 @@ class MainWordModel(models.Model):
 
 class WordThemeModel(models.Model):
     word = models.ForeignKey(
+        related_name="word_theme",
         on_delete=models.CASCADE,
         to=MainWordModel,
     )
     theme = models.ForeignKey(
+        related_name="word_theme",
         on_delete=models.CASCADE,
         to=ThemeModel,
     )
